@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  mysql:
+    image: 'mysql:8.0'
+    working_dir: /application
+    volumes:
+      - './laravel-php:/application'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=laravel_php
+      - MYSQL_USER=laravel_user
+      - MYSQL_PASSWORD=strong_password
+    ports:
+      - '8002:3306'
+
+  webserver:
+    image: 'nginx:alpine'
+    working_dir: /application
+    volumes:
+      - './laravel-php:/application' 
+      - './phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+    ports:
+      - '8000:80'
+
+  php-fpm:
+    build: phpdocker/php-fpm 
+    working_dir: /application
+    volumes:
+      - './laravel-php:/application'
+      - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
+      - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/cli/conf.d/99-overrides.ini'
