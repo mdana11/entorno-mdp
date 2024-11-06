@@ -19,7 +19,7 @@
                 </div>
             </div>
           </div>
-  
+          <input type="hidden" name="employer_id" value="1">
           <div class="sm:col-span-4">
             <label for="salary" class="block text-sm font-medium leading-6 text-gray-900">Salary</label>
             <div class="mt-2">

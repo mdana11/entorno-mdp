@@ -10,15 +10,10 @@ class Job extends Model {
 
     protected $table = 'Job_listing';
 
-    protected $fillable = ['title', 'salary'];
+    protected $fillable = ['title', 'salary', 'employer_id'];
 
     public function employer()
     {
         return $this->belongsTo(Employer::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, foreignPivotKey: 'job_listing_id');
     }
 }
